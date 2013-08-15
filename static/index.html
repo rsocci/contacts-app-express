@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ContactBook</title>
+	<style>
+	table thead td {
+		font-weight: bold;
+		padding-right: 10px;
+	}
+	.module {
+		margin-bottom: 2em;
+	}
+	</style>
+</head>
+<body>
+
+<h1>Contacts</h1>
+
+<form id="addContact" class="module">
+	<div>
+		<label for="first_name">First Name: </label>
+		<input type="text" id="first_name" name="first_name">
+	</div>
+	<div>
+		<label for="last_name">Last Name: </label>
+		<input type="text" id="last_name" name="last_name">
+	</div>
+	<div>
+		<label for="email">Email Address: </label>
+		<input type="text" id="email" name="email">
+	</div>
+	<div>
+		<input type="submit" value="Add contact">
+	</div>
+</form>
+
+<table id="allContacts" class="module">
+	<thead>
+		<tr>
+			<td>First Name</td>
+			<td>Last Name</td>
+			<td>Email</td>
+			<td>Config</td>
+		</tr>
+	</thead>
+</table>
+
+<div id="editContact" class="module">
+
+</div>
+
+<script id="allContactsTemplate" type="text/template">
+	<td><%= firstName %></td>
+	<td><%= lastName %></td>
+	<td><%= email %></td>
+	<td><a href="#contacts/<%= _id %>" class="delete">Delete</a></td>
+	<td><a href="#contacts/<%= _id %>" class="edit">Edit</a></td>
+</script>
+
+
+<script id="editContactTemplate" type="text/template">
+	<h3>Edit Contact: <%= firstName %> <%= lastName %></h3>
+	<form id="editContact">
+		<div>
+			<label for="edit_first_name">First Name: </label>
+			<input type="text" id="edit_first_name" name="edit_first_name" value="<%= firstName %>">
+		</div>
+		<div>
+			<label for="edit_last_name">Last Name: </label>
+			<input type="text" id="edit_last_name" name="edit_last_name" value="<%= lastName %>">
+		</div>
+		<div>
+			<label for="edit_email">Email Address: </label>
+			<input type="text" id="edit_email" name="edit_email" value="<%= email %>">
+		</div>
+		<div>
+			<input type="submit" value="Update">
+			<button type="button" class="cancel">Cancel</button>
+		</div>
+	</form>
+</script>
+
+<script src="js/underscore.js"></script>
+<script src="js/jquery.js"></script>
+<script src="js/backbone.js"></script>
+<script src="js/main.js"></script>
+<script src="js/models.js"></script>
+<script src="js/collections.js"></script>
+<script src="js/views.js"></script>
+<script src="js/router.js"></script>
+
+<script>
+	new App.Router;
+	Backbone.history.start(); // start watching for hash change events
+
+	App.contacts = new App.Collections.Contacts;
+	App.contacts.fetch().then(function() {
+		new App.Views.App({ collection: App.contacts });
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+{
+  "name": "contact-book",
+  "version": "0.0.1",
+  "description": "contact book application",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Romina Vargas",
+  "license": "BSD",
+  "dependencies": {
+    "express": "~3.3.4",
+    "mongodb": "*"
+  }
+}
